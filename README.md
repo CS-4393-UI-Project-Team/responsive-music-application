@@ -46,20 +46,29 @@ Develop a comprehensive music streaming web platform that allows users to create
 
 ## Access to Our UX Research Survey
 Link to our UX Research Survey:
+![Music Streaming Experience and Habits Survey ](https://docs.google.com/forms/d/e/1FAIpQLSdxIPWKm6n_upEq1YTzsDS_L-WETpR4ByFQEw78LOU56fWYdQ/viewform?usp=sf_link)
 
 ## Figma Prototypes
 Link to our Figma prototypes before coding:
-https://www.figma.com/design/Rshx9rLqZSDbKyKyqeCJkM/Music-Application-Prototypes?node-id=0-1&node-type=canvas&t=UyN8dWxb0fBaK2jS-0
+![Early App Concepts](https://www.figma.com/design/Rshx9rLqZSDbKyKyqeCJkM/Music-Application-Prototypes?node-id=0-1&node-type=canvas&t=UyN8dWxb0fBaK2jS-0)
 
 ## Our Tech Stack
 UX Design and Research Tools:
 
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+
 Front-end:
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
 Back-end:
 
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+
 Database Management:
+
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ## Link to Deployed Application
 
-## Video Walkthrough
+## Application Images
