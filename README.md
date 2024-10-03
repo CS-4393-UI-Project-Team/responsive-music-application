@@ -46,7 +46,7 @@ Develop a comprehensive music streaming web platform that allows users to create
 
 ## Access to Our UX Research Survey
 Link to our UX Research Survey:
-![Music Streaming Experience and Habits Survey ](https://docs.google.com/forms/d/e/1FAIpQLSdxIPWKm6n_upEq1YTzsDS_L-WETpR4ByFQEw78LOU56fWYdQ/viewform?usp=sf_link)
+![Music Streaming Experience and Habits Survey ](https://docs.google.com/forms/d/e/1FAIpQLSdlhO_tCgjRzPqiF3Nrh0CIGYTxJ2Rzk78__p57yMKQF6JG6A/viewform?usp=sf_link)
 
 ## Figma Prototypes
 Link to our Figma prototypes before coding:
