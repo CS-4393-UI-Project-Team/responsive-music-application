@@ -46,16 +46,16 @@ Develop a comprehensive music streaming web platform that allows users to create
 
 ## Access to Our UX Research Survey
 Link to our UX Research Survey:
-![Music Streaming Experience and Habits Survey](https://docs.google.com/forms/d/e/1FAIpQLSdlhO_tCgjRzPqiF3Nrh0CIGYTxJ2Rzk78__p57yMKQF6JG6A/viewform?usp=sf_link)
+[Early Concepts](#https://docs.google.com/forms/d/e/1FAIpQLSdlhO_tCgjRzPqiF3Nrh0CIGYTxJ2Rzk78__p57yMKQF6JG6A/viewform?usp=sf_link)
 
 ## Figma Prototypes
 Link to our Figma prototypes before coding:
-![Early App Concepts](https://www.figma.com/design/Rshx9rLqZSDbKyKyqeCJkM/Music-Application-Prototypes?node-id=0-1&node-type=canvas&t=UyN8dWxb0fBaK2jS-0)
+[User Experience with Music Apps](#https://www.figma.com/design/Rshx9rLqZSDbKyKyqeCJkM/Music-Application-Prototypes?node-id=0-1&node-type=canvas&t=UyN8dWxb0fBaK2jS-0)
 
 ## Our Tech Stack
 UX Design and Research Tools:
 
-![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+![Figma](#https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
 Front-end:
 
