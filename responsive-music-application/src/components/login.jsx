@@ -1,47 +1,69 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebookF,
+  faLinkedinIn,
+  faInstagram,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 function LoginPage() {
-  const { loginWithRedirect, isAuthenticated, user } = useAuth0(); // Destructure Auth0 hooks
+  const { loginWithRedirect } = useAuth0();
 
   return (
-    <div className="relative w-full min-h-screen bg-[#06A0B5] opacity-100">
-      {/* Container for the login form */}
-      <div className="container min-h-screen flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-          {/* Header section with logo */}
-          <div className="flex flex-row items-center justify-center mb-4">
-            <h1 className="ml-2 text-3xl font-bold text-black">Music-App</h1>
+    <div className="flex h-screen">
+      {/* Left Panel - Sign In */}
+      <div className="flex flex-col items-center justify-center w-1/2 bg-[#3D9EA0] text-white p-10 space-y-6">
+        <h2 className="text-3xl font-bold">Sign In</h2>
+        <form className="flex flex-col w-2/3 space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            className="p-2 text-gray-800 rounded-md"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="p-2 text-gray-800 rounded-md"
+          />
+          <div className="flex items-center space-x-2">
+            <input type="checkbox" id="remember" />
+            <label htmlFor="remember">Remember me</label>
           </div>
+          <a href="#" className="text-sm text-gray-300">
+            Forgot your password?
+          </a>
+          <button
+            onClick={loginWithRedirect}
+            className="bg-white text-[#3D9EA0] rounded-md py-2 font-semibold"
+          >
+            Sign In
+          </button>
+        </form>
+        <p className="text-sm">or continue with</p>
+        <div className="flex space-x-4">
+          <FontAwesomeIcon icon={faFacebookF} className="text-2xl" />
+          <FontAwesomeIcon icon={faLinkedinIn} className="text-2xl" />
+          <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
+          <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
+        </div>
+      </div>
 
-          {/* Authentication Status */}
-          {isAuthenticated ? (
-            <div className="text-center">
-              <p className="text-lg">Welcome, {user.name}!</p>
-              <button
-                onClick={() => logout({ returnTo: window.location.origin })}
-                className="btn bg-[#06A0B5] text-white mt-4 w-full"
-              >
-                Log Out
-              </button>
-            </div>
-          ) : (
-            <>
-              {/* Page title */}
-              <h1 className="text-2xl font-bold text-center mb-6">
-                Login to Your Account
-              </h1>
-              {/* Auth0 Login Button */}
-              <div className="text-center">
-                <button
-                  onClick={() => loginWithRedirect()}
-                  className="btn bg-[#06A0B5] text-white mt-4 w-full"
-                >
-                  Log In with Auth0
-                </button>
-              </div>
-            </>
-          )}
+      {/* Right Panel - Sign Up */}
+      <div className="flex flex-col items-center justify-center w-1/2 bg-[#1C1C1C] text-white p-10 space-y-6">
+        <h2 className="text-3xl font-bold">Hello, Friend!</h2>
+        <p>
+          Register with your personal details to use all provided site features.
+        </p>
+        <button
+          onClick={loginWithRedirect}
+          className="bg-[#3D9EA0] text-white rounded-md py-2 px-4 font-semibold"
+        >
+          Sign Up
+        </button>
+        <div className="text-center mt-10">
+          <h1 className="text-5xl font-bold">SoundWave</h1>
         </div>
       </div>
     </div>
