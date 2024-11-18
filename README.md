@@ -1,6 +1,7 @@
 # responsive-music-application
 
 ## Table of Contents
+
 1. [Overview](#Overview)
 2. [Project Description](#Project-Description)
 3. [Access to Our UX Research Survey](#Access-Our-UX-Research-Survey)
@@ -16,43 +17,46 @@ Develop a comprehensive music streaming web platform that allows users to create
 ## Project Description
 
 - Login
-   - Create account
-   - Existing user
-   - **possible login with existing account from other apps
+  - Create account
+  - Existing user
+  - \*\*possible login with existing account from other apps
 - Songs
-   - Lyrics
-   - Album, Artist
-   - Release Date
-   - Price
+  - Lyrics
+  - Album, Artist
+  - Release Date
+  - Price
 - Search
-   - Genre
-   - Lyrics
-   - Album, Artist
-   - Release Date
-   - Users (usernames)
+  - Genre
+  - Lyrics
+  - Album, Artist
+  - Release Date
+  - Users (usernames)
 - Organizing and filtering
-   - Genre
-   - Sort alphabetically
+  - Genre
+  - Sort alphabetically
 - Inspect details
-   - Owned/saved
-   - Price
-   - Recommended songs
+  - Owned/saved
+  - Price
+  - Recommended songs
 - Shopping cart
-   - Check-out 
-   - Subscription tiers
-- User Profiles 
-   - Username
-   - Top Song
+  - Check-out
+  - Subscription tiers
+- User Profiles
+  - Username
+  - Top Song
 
 ## Access to Our UX Research Survey
+
 Link to our UX Research Survey:
 https://docs.google.com/forms/d/e/1FAIpQLSdlhO_tCgjRzPqiF3Nrh0CIGYTxJ2Rzk78__p57yMKQF6JG6A/viewform?usp=sf_link
 
 ## Figma Prototypes
+
 Link to our Figma prototypes before coding:
 https://www.figma.com/design/Rshx9rLqZSDbKyKyqeCJkM/Music-Application-Prototypes?node-id=0-1&node-type=canvas&t=UyN8dWxb0fBaK2jS-0
 
 ## Our Tech Stack
+
 UX Design and Research Tools:
 
 ![Figma](#https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
@@ -68,6 +72,34 @@ Back-end:
 Database Management:
 
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+
+## Prerequisites
+
+Ensure the following tools are installed:
+
+- Node.js (v16 or later)
+- MongoDB (local instance or cloud connection)
+- A package manager (npm or yarn)
+
+## Steps to Run Locally
+
+- Clone the Repository
+- Install Dependencies:
+  Visit each of the 3 main directories and run npm install
+- Set Up Environment Variables
+  in responsive-music-application you need a .env with "VITE_AUTH0_DOMAIN=dev-k5wtcdx4dwo3han3.us.auth0.com
+  VITE_AUTH0_CLIENT_ID=hl1RlR4S6NaoNvKWM2rqVxbSHkZkVKy5"
+  in music-app-back-end you need a .env file with "CLOUDINARY_NAME = "dxjsxe7a5"
+  CLOUDINARY_API_KEY = "675443672967721"
+  CLOUDINARY_SECRET_KEY = "vISFnyCzY1IGGvBBQ61LQiIAfXw"
+  MONGODB_URI = "mongodb+srv://jaemg8:jmg033121@cluster0.la4zf.mongodb.net""
+- Run the Backend Server
+  "npm run server"
+- Run the Frontend Server
+  for admin panel fo to music_app-admin and run "npm run dev"
+  for the application run "npm run dev" in the responsive-music-application directory
+- Access the Application
+  You should be able to see the site on your localhost:5173
 
 ## Link to Deployed Application
 
