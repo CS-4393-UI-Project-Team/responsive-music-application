@@ -17,23 +17,6 @@ function LoginPage() {
       <div className="flex flex-col items-center justify-center w-1/2 bg-[#3D9EA0] text-white p-10 space-y-6">
         <h2 className="text-3xl font-bold">Sign In</h2>
         <form className="flex flex-col w-2/3 space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="p-2 text-gray-800 rounded-md"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="p-2 text-gray-800 rounded-md"
-          />
-          <div className="flex items-center space-x-2">
-            <input type="checkbox" id="remember" />
-            <label htmlFor="remember">Remember me</label>
-          </div>
-          <a href="#" className="text-sm text-gray-300">
-            Forgot your password?
-          </a>
           <button
             onClick={loginWithRedirect}
             className="bg-white text-[#3D9EA0] rounded-md py-2 font-semibold"
@@ -41,13 +24,6 @@ function LoginPage() {
             Sign In
           </button>
         </form>
-        <p className="text-sm">or continue with</p>
-        <div className="flex space-x-4">
-          <FontAwesomeIcon icon={faFacebookF} className="text-2xl" />
-          <FontAwesomeIcon icon={faLinkedinIn} className="text-2xl" />
-          <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
-          <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
-        </div>
       </div>
 
       {/* Right Panel - Sign Up */}
