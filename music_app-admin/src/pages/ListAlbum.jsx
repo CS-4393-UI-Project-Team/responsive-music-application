@@ -45,7 +45,7 @@ const ListAlbum = () => {
         <div className="sm:grid hidden grid-cols-[0.5fr_1fr_2fr_1fr_0.5fr] items-center gap-2.5 p-3 border-gray-300 text-sm mr-5 bg-gray-100">
           <b>Image</b>
           <b>Name</b>
-          <b>Descriptio</b>
+          <b>Description</b> //typo fixed for consistency
           <b>Album Color</b>
           <b>Action</b>
         </div>
