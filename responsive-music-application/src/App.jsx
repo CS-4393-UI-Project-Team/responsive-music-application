@@ -2,55 +2,41 @@ import React, { useContext } from "react";
 import Sidebar from "./components/sidebar.jsx";
 import Player from "./components/player.jsx";
 import Display from "./components/Display.jsx";
+import DisplayHome from "./components/DisplayHome.jsx";
 import LoginPage from "./components/login.jsx";
+import SignupPage from "./components/signup.jsx";
 import { PlayerContext } from "./context/PlayerContext.jsx";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   const { audioRef, track, songsData } = useContext(PlayerContext);
-  const { isAuthenticated, isLoading } = useAuth0();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="h-screen bg-black">
       <Routes>
-        {/* Login Page Route */}
         <Route path="/login" element={<LoginPage />} />
-
-        {/* Main Application Route */}
+        <Route path="/signup" element={<SignupPage />} /> 
+        <Route path="/home" element={<DisplayHome />} />
         <Route
-          path="/"
+          path="/DisplayHome"
           element={
-            isAuthenticated ? (
-              songsData.length !== 0 ? (
-                <>
-                  <div className="h-[90%] flex">
-                    <Sidebar />
-                    <Display />
-                  </div>
-                  <Player />
-                  <audio
-                    ref={audioRef}
-                    src={track ? track.file : ""}
-                    preload="auto"
-                  ></audio>
-                </>
-              ) : (
-                <div className="flex items-center justify-center h-full text-white">
-                  Loading songs...
+            songsData.length !== 0 ? (
+              <>
+                <div className="h-[90%] flex">
+                  <Sidebar />
+                  <Display />
                 </div>
-              )
+                <Player />
+                <audio ref={audioRef} src={track ? track.file : ""} preload="auto"></audio>
+              </>
             ) : (
-              <Navigate to="/login" />
+              <div className="flex items-center justify-center h-full text-white">
+                Loading songs...
+              </div>
             )
           }
         />
-        {/* Catch-all Route */}
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<LoginPage />} />
       </Routes>
     </div>
   );
