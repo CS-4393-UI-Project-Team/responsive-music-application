@@ -96,7 +96,7 @@ Ensure the following tools are installed:
 - Run the Backend Server
   "npm run server"
 - Run the Frontend Server
-  for admin panel fo to music_app-admin and run "npm run dev"
+  for admin panel go to music_app-admin and run "npm run dev"
   for the application run "npm run dev" in the responsive-music-application directory
 - Access the Application
   You should be able to see the site on your localhost:5173
