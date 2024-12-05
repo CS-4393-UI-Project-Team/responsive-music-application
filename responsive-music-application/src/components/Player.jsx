@@ -17,7 +17,7 @@ const Player = () => {
   } = useContext(PlayerContext);
 
   return track ? (
-    <div className="h-[10%] bg-black flex justify-between items-center text-white px-4">
+    <div className="h-[10%] bg-[#06A0B5] flex justify-between items-center text-white px-4">
       <div className="hidden lg:flex items-center gap-4">
         <img className="w-12" src={track.image} alt="" />
         <div>
@@ -63,7 +63,7 @@ const Player = () => {
         </div>
         <div className="flex items-center gap-5">
           <p>
-            {time?.currentTime?.minute || 0}:{time?.currentTime?.second || 0}
+            {time.currentTime.minute}:{time.currentTime.second}
           </p>
           <div
             ref={seekBg}
@@ -72,7 +72,7 @@ const Player = () => {
           >
             <hr
               ref={seekBar}
-              className="h-1 border-none w-0 bg-green-800 rounded-full"
+              className="h-1 border-none w-0 bg-[#06A0B5] rounded-full"
             />
           </div>
           <p>
