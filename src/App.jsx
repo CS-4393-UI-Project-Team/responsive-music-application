@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import Sidebar from "./components/sidebar.jsx";
 import Player from "./components/player.jsx";
 import Display from "./components/Display.jsx";
+import NavBar from "./components/NavBar.jsx";
 import LoginPage from "./components/login.jsx";
 import { PlayerContext } from "./context/PlayerContext.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import Podcast from "./components/Podcast.jsx";
 
 const App = () => {
   const { audioRef, track, songsData } = useContext(PlayerContext);
@@ -28,6 +30,7 @@ const App = () => {
             isAuthenticated ? (
               songsData.length !== 0 ? (
                 <>
+                  <NavBar />
                   <div className="h-[90%] flex">
                     <Sidebar />
                     <Display />
@@ -49,6 +52,9 @@ const App = () => {
             )
           }
         />
+
+        <Route path="/Podcast" element={<Podcast />} />
+        
         {/* Catch-all Route */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
