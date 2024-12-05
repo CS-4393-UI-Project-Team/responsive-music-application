@@ -11,7 +11,7 @@ const App = () => {
   const { audioRef, track, songsData } = useContext(PlayerContext);
   const { isAuthenticated, isLoading } = useAuth0();
 
-  if (isLoading) {
+  if (isLoading || !songsData) {
     return <div>Loading...</div>;
   }
 
@@ -49,8 +49,6 @@ const App = () => {
             )
           }
         />
-        {/* Catch-all Route */}
-        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </div>
   );

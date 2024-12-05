@@ -63,7 +63,7 @@ const Player = () => {
         </div>
         <div className="flex items-center gap-5">
           <p>
-            {time.currentTime.minute}:{time.currentTime.second}
+            {time?.currentTime?.minute || 0}:{time?.currentTime?.second || 0}
           </p>
           <div
             ref={seekBg}
