@@ -31,11 +31,11 @@ const DisplayAlbum = (album) => {
           <p className="mt-1">
             <img
               className="inline-block w-5"
-              src={assets.spotify_logo}
+              src={assets.SoundWave_Logo}
               alt=""
             />
-            <b>MUSIC-APP-NAME</b> • ??????? likes • <b>50 songs,</b>
-            about 2hr 30 min
+            <b>SoundWave</b> • ??????? likes • <b>?? songs,</b>
+            about ?hr ?min
           </p>
         </div>
       </div>
