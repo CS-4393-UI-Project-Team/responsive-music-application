@@ -23,7 +23,7 @@ const App = () => {
 
         {/* Main Application Route */}
         <Route
-          path="/"
+          path="*"
           element={
             isAuthenticated ? (
               songsData.length !== 0 ? (

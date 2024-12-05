@@ -31,7 +31,7 @@ const Display = () => {
     >
       {albumsData.length > 0 ? (
         <Routes>
-          <Route path="/" element={<DisplayHome />} />
+          <Route path="*" element={<DisplayHome />} />
           <Route
             path="/album/:id"
             element={
