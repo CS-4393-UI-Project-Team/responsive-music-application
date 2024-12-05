@@ -90,11 +90,12 @@ const PlayerContextProvider = (props) => {
   };
 
   useEffect(() => {
-    if (audioRef.current) {
-      const updateTime = () => {
-        seekBar.current.style.width = `${Math.floor(
-          (audioRef.current.currentTime / audioRef.current.duration) * 100
-        )}%`;
+    setTimeout(() => {
+      audioRef.current.ontimeupdate = () => {
+        seekBar.current.style.width =
+          Math.floor(
+            (audioRef.current.currentTime / audioRef.current.duration) * 100
+          ) + "%";
         setTime({
           currentTime: {
             second: Math.floor(audioRef.current.currentTime % 60),
@@ -106,13 +107,7 @@ const PlayerContextProvider = (props) => {
           },
         });
       };
-
-      audioRef.current.ontimeupdate = updateTime;
-
-      return () => {
-        audioRef.current.ontimeupdate = null;
-      };
-    }
+    }, 1000);
   }, [audioRef]);
 
   useEffect(() => {
