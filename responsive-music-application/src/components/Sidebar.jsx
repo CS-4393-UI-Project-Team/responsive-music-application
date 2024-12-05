@@ -67,6 +67,20 @@ const Sidebar = () => {
             Browse Podcasts
           </button>
         </div>
+
+        {/* Shopping Cart Section */}
+        <div
+          onClick={() => navigate("/cart")}
+          className="p-4 bg-[#242424] m-2 rounded font-semibold flex items-center justify-between cursor-pointer hover:bg-[#1f1f1f] transition mt-4"
+        >
+          <div className="flex items-center gap-3">
+            <img className="w-6" src={assets.cart_icon} alt="Cart Icon" />
+            <p className="text-white">Shopping Cart</p>
+          </div>
+          <p className="font-light text-gray-400">
+            {/* Cart count could go here */}
+          </p>
+        </div>
       </div>
     </div>
   );

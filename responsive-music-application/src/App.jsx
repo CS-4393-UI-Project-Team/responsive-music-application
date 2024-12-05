@@ -4,6 +4,7 @@ import Player from "./components/player.jsx";
 import Display from "./components/Display.jsx";
 import LoginPage from "./components/login.jsx";
 import Footer from "./components/Footer.jsx"; // Import Footer component
+import ShoppingCart from "./components/ShoppingCart"; // Import ShoppingCart component
 import { PlayerContext } from "./context/PlayerContext.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -13,11 +14,15 @@ const App = () => {
   const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading || !songsData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen bg-black text-white">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div className="h-screen bg-black flex flex-col">
+    <div className="h-screen bg-[#121212] flex flex-col">
       <Routes>
         {/* Login Page Route */}
         <Route path="/login" element={<LoginPage />} />
@@ -30,15 +35,20 @@ const App = () => {
               songsData.length !== 0 ? (
                 <>
                   <div className="flex-grow flex">
+                    {/* Sidebar on the left */}
                     <Sidebar />
+                    {/* Main content area */}
                     <Display />
                   </div>
+                  {/* Player component stays at the bottom of the screen */}
                   <Player />
-                  <Footer /> {/* Add Footer component here */}
+                  <Footer /> {/* Add Footer at the bottom */}
+                  {/* Audio element for controlling audio */}
                   <audio
                     ref={audioRef}
                     src={track ? track.file : ""}
                     preload="auto"
+                    className="hidden"
                   ></audio>
                 </>
               ) : (
@@ -51,6 +61,9 @@ const App = () => {
             )
           }
         />
+
+        {/* Shopping Cart Route */}
+        <Route path="/cart" element={<ShoppingCart />} />
       </Routes>
     </div>
   );
