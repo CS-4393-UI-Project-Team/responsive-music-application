@@ -23,7 +23,6 @@ const Sidebar = () => {
           <img src={assets.add_song} className="w-5" alt="Add Song Icon" />
           <p className="hidden sm:block">Add Song</p>
         </NavLink>
-
         <NavLink
           to="/list-song"
           className="flex items-center gap-2.5 text-gray-800 bg-white border border-black p-2 pr-[max(8vw,10px)] drop-shadow-[-4px_4px_#000000] cursor-pointer text-sm font-medium"
@@ -31,7 +30,6 @@ const Sidebar = () => {
           <img src={assets.song_icon} className="w-5" alt="List Songs Icon" />
           <p className="hidden sm:block">List Songs</p>
         </NavLink>
-
         <NavLink
           to="/add-album"
           className="flex items-center gap-2.5 text-gray-800 bg-white border border-black p-2 pr-[max(8vw,10px)] drop-shadow-[-4px_4px_#000000] cursor-pointer text-sm font-medium"
@@ -39,13 +37,34 @@ const Sidebar = () => {
           <img src={assets.add_album} className="w-5" alt="Add Album Icon" />
           <p className="hidden sm:block">Add Album</p>
         </NavLink>
-
         <NavLink
           to="/list-album"
           className="flex items-center gap-2.5 text-gray-800 bg-white border border-black p-2 pr-[max(8vw,10px)] drop-shadow-[-4px_4px_#000000] cursor-pointer text-sm font-medium"
         >
           <img src={assets.album_icon} className="w-5" alt="List Albums Icon" />
-          <p className="hidden sm:block">List Album</p>
+          <p className="hidden sm:block">List Albums</p>
+        </NavLink>
+        <NavLink
+          to="/manage-playlists"
+          className="flex items-center gap-2.5 text-gray-800 bg-white border border-black p-2 pr-[max(8vw,10px)] drop-shadow-[-4px_4px_#000000] cursor-pointer text-sm font-medium"
+        >
+          <img
+            src={assets.album_icon}
+            className="w-5"
+            alt="Manage Playlist Icon"
+          />
+          <p className="hidden sm:block">Manage Playlists</p>
+        </NavLink>
+        <NavLink
+          to="/manage-users"
+          className="flex items-center gap-2.5 text-gray-800 bg-white border border-black p-2 pr-[max(8vw,10px)] drop-shadow-[-4px_4px_#000000] cursor-pointer text-sm font-medium"
+        >
+          <img
+            src={assets.SoundWave_Logo_Small}
+            className="w-5"
+            alt="Manage Users Icon"
+          />
+          <p className="hidden sm:block">Manage Users</p>
         </NavLink>
       </div>
     </div>

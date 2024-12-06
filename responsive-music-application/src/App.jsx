@@ -1,20 +1,33 @@
 // src/App.jsx
 
-import React, { useContext } from "react";
-import Sidebar from "./components/sidebar.jsx";
-import Player from "./components/player.jsx";
+import React, { useContext, useEffect, useState } from "react";
+import Sidebar from "./components/Sidebar.jsx";
+import Player from "./components/Player.jsx";
 import Display from "./components/Display.jsx";
 import LoginPage from "./components/login.jsx";
+import RegisterPage from "./components/register.jsx";
 import Footer from "./components/Footer.jsx"; // Import Footer component
-import ShoppingCart from "./components/ShoppingCart"; // Import ShoppingCart component
-import SearchPage from "./components/SearchPage"; // Import SearchPage component
+import ShoppingCart from "./components/ShoppingCart.jsx"; // Import ShoppingCart component
+import SearchPage from "./components/SearchPage.jsx"; // Import SearchPage component
 import { PlayerContext } from "./context/PlayerContext.jsx";
+import ProfilePage from "./components/ProfilePage.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+
+export const url = "http://localhost:4000";
 
 const App = () => {
   const { audioRef, track, songsData } = useContext(PlayerContext);
-  const { isAuthenticated, isLoading } = useAuth0();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Check authentication state based on token in localStorage
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+    setIsLoading(false);
+  }, []);
 
   if (isLoading || !songsData) {
     return (
@@ -30,11 +43,28 @@ const App = () => {
         {/* Login Page Route */}
         <Route path="/login" element={<LoginPage />} />
 
+        {/* Register Page Route */}
+        <Route path="/register" element={<RegisterPage />} />
+
         {/* Search Page Route */}
-        <Route path="/search" element={<SearchPage />} />
+        <Route
+          path="/search"
+          element={isAuthenticated ? <SearchPage /> : <Navigate to="/login" />}
+        />
+
+        {/* Profile Page Route */}
+        <Route
+          path="/profile"
+          element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />}
+        />
 
         {/* Shopping Cart Route */}
-        <Route path="/cart" element={<ShoppingCart />} />
+        <Route
+          path="/cart"
+          element={
+            isAuthenticated ? <ShoppingCart /> : <Navigate to="/login" />
+          }
+        />
 
         {/* Main Application Route */}
         <Route

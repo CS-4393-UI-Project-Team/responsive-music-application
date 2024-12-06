@@ -19,7 +19,7 @@ const Player = () => {
   return track ? (
     <div className="h-[10%] bg-[#06A0B5] flex justify-between items-center text-white px-4">
       <div className="hidden lg:flex items-center gap-4">
-        <img className="w-12" src={track.image} alt="" />
+        <img className="w-12" src={track.image} alt={track.name} />
         <div>
           <p>{track.name}</p>
           <p>{track.desc.slice(0, 12)}</p>
@@ -30,40 +30,47 @@ const Player = () => {
           <img
             className="w-4 cursor-pointer"
             src={assets.shuffle_icon}
-            alt=""
+            alt="Shuffle"
           />
           <img
             onClick={previous}
             className="w-4 cursor-pointer"
             src={assets.prev_icon}
-            alt=""
+            alt="Previous"
           />
           {playStatus ? (
             <img
               onClick={pause}
               className="w-4 cursor-pointer"
               src={assets.pause_icon}
-              alt=""
+              alt="Pause"
             />
           ) : (
             <img
               onClick={play}
               className="w-4 cursor-pointer"
               src={assets.play_icon}
-              alt=""
+              alt="Play"
             />
           )}
           <img
             onClick={next}
             className="w-4 cursor-pointer"
             src={assets.next_icon}
-            alt=""
+            alt="Next"
           />
-          <img className="w-4 cursor-pointer" src={assets.loop_icon} alt="" />
+          <img
+            className="w-4 cursor-pointer"
+            src={assets.loop_icon}
+            alt="Loop"
+          />
         </div>
         <div className="flex items-center gap-5">
           <p>
-            {time.currentTime.minute}:{time.currentTime.second}
+            {time.currentTime.minute}:
+            {time.currentTime.second < 10
+              ? "0" + time.currentTime.second
+              : time.currentTime.second}
           </p>
           <div
             ref={seekBg}
@@ -76,19 +83,26 @@ const Player = () => {
             />
           </div>
           <p>
-            {time.totalTime.minute}:{time.totalTime.second}
+            {time.totalTime.minute}:
+            {time.totalTime.second < 10
+              ? "0" + time.totalTime.second
+              : time.totalTime.second}
           </p>
         </div>
       </div>
       <div className="hidden lg:flex items-center gap-2 opacity-75">
-        <img className="w-4" src={assets.plays_icon} alt="" />
-        <img className="w-4" src={assets.mic_icon} alt="" />
-        <img className="w-4" src={assets.queue_icon} alt="" />
-        <img className="w-4" src={assets.speaker_icon} alt="" />
-        <img className="w-4" src={assets.volume_icon} alt="" />
+        <img className="w-4" src={assets.plays_icon} alt="Play Icon" />
+        <img className="w-4" src={assets.mic_icon} alt="Mic Icon" />
+        <img className="w-4" src={assets.queue_icon} alt="Queue Icon" />
+        <img className="w-4" src={assets.speaker_icon} alt="Speaker Icon" />
+        <img className="w-4" src={assets.volume_icon} alt="Volume Icon" />
         <div className="w-20 bg-slate-50 h-1 rounded"></div>
-        <img className="w-4" src={assets.mini_player_icon} alt="" />
-        <img className="w-4" src={assets.zoom_icon} alt="" />
+        <img
+          className="w-4"
+          src={assets.mini_player_icon}
+          alt="Mini Player Icon"
+        />
+        <img className="w-4" src={assets.zoom_icon} alt="Zoom Icon" />
       </div>
     </div>
   ) : null;

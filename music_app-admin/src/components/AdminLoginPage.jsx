@@ -1,4 +1,4 @@
-// src/components/login.jsx
+// src/components/AdminLoginPage.jsx
 
 import React, { useState } from "react";
 import axios from "axios";
@@ -7,7 +7,7 @@ import { url } from "../App"; // Import base API URL
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function LoginPage() {
+function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -21,15 +21,22 @@ function LoginPage() {
         password,
       });
       if (response.data.success) {
-        toast.success("Login successful!");
+        const { user } = response.data;
+        if (user.isAdmin) {
+          toast.success("Admin login successful!");
 
-        // Save token and user info to local storage
-        const { token, user } = response.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+          // Save token and user info to local storage
+          const { token } = response.data;
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(user));
 
-        // Redirect all users (including admin) to the main music app
-        navigate("/");
+          // Redirect to admin dashboard
+          navigate("/add-song");
+        } else {
+          toast.error(
+            "Access denied. You are not authorized to access the admin panel."
+          );
+        }
       } else {
         toast.error("Invalid credentials. Please try again.");
       }
@@ -46,9 +53,9 @@ function LoginPage() {
       style={{ minHeight: "100vh" }}
     >
       {/* Wrapper */}
-      <div className="flex flex-col w-full sm:w-[400px] h-auto shadow-lg rounded-lg overflow-hidden bg-[#282828]">
+      <div className="flex flex-col w-full sm:w-[400px] h-auto sm:h-[400px] shadow-lg rounded-lg overflow-hidden bg-[#282828]">
         <div className="flex flex-col items-center justify-center w-full bg-[#3D9EA0] text-white p-6 sm:p-10 space-y-6">
-          <h2 className="text-2xl sm:text-3xl font-bold">Sign In</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold">Admin Sign In</h2>
           <form
             className="flex flex-col w-full sm:w-2/3 space-y-4"
             onSubmit={(e) => e.preventDefault()}
@@ -78,14 +85,6 @@ function LoginPage() {
               {isLoading ? "Signing In..." : "Sign In"}
             </button>
           </form>
-          <div className="text-white mt-4">
-            <button
-              onClick={() => navigate("/register")}
-              className="text-white hover:underline"
-            >
-              Don't have an account? Sign Up
-            </button>
-          </div>
         </div>
       </div>
       <ToastContainer />
@@ -93,4 +92,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default AdminLoginPage;

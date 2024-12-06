@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const [usernameInitial, setUsernameInitial] = useState("D");
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && user.username) {
+      setUsernameInitial(user.username.charAt(0).toUpperCase());
+    }
+  }, []);
 
   return (
     <>
@@ -29,9 +37,12 @@ const NavBar = () => {
           <p className="bg-black py-1 px-3 rounded-2xl text[15px] cursor-pointer">
             Install App
           </p>
-          <p className="bg-purple-500 text-black w-7 h-7 rounded-full flex items-center justify-center">
-            D
-          </p>
+          <button
+            onClick={() => navigate("/profile")}
+            className="bg-purple-500 text-black w-7 h-7 rounded-full flex items-center justify-center"
+          >
+            {usernameInitial}
+          </button>
         </div>
       </div>
       <div className="flex items-center gap-2 mt-4">

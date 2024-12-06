@@ -1,19 +1,28 @@
-import React from "react";
+// src/App.jsx
 
+import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import AddSong from "./pages/AddSong";
 import AddAlbum from "./pages/AddAlbum";
 import ListSong from "./pages/ListSong";
 import ListAlbum from "./pages/ListAlbum";
+import ManagePlaylists from "./pages/ManagePlaylists"; // Import ManagePlaylists component
+import ManageUsers from "./pages/ManageUsers"; // Import ManageUsers component
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import AdminLoginPage from "./components/AdminLoginPage"; // Import AdminLoginPage component
 
 export const url = "http://localhost:4000";
 
 const App = () => {
+  const isAdmin = () => {
+    const user = localStorage.getItem("user");
+    return user && JSON.parse(user).isAdmin;
+  };
+
   return (
     <div className="flex items-start min-h-screen">
       <ToastContainer />
@@ -23,10 +32,42 @@ const App = () => {
         <Navbar />
         <div className="pt-8 pl-5 sm:pt-12 sm:pl-12">
           <Routes>
-            <Route path="/add-song" element={<AddSong />} />
-            <Route path="/add-album" element={<AddAlbum />} />
-            <Route path="/list-song" element={<ListSong />} />
-            <Route path="/list-album" element={<ListAlbum />} />
+            <Route path="/admin/login" element={<AdminLoginPage />} />
+            {/* Protected Routes */}
+            <Route
+              path="/add-song"
+              element={isAdmin() ? <AddSong /> : <Navigate to="/admin/login" />}
+            />
+            <Route
+              path="/add-album"
+              element={
+                isAdmin() ? <AddAlbum /> : <Navigate to="/admin/login" />
+              }
+            />
+            <Route
+              path="/list-song"
+              element={
+                isAdmin() ? <ListSong /> : <Navigate to="/admin/login" />
+              }
+            />
+            <Route
+              path="/list-album"
+              element={
+                isAdmin() ? <ListAlbum /> : <Navigate to="/admin/login" />
+              }
+            />
+            <Route
+              path="/manage-playlists"
+              element={
+                isAdmin() ? <ManagePlaylists /> : <Navigate to="/admin/login" />
+              }
+            />
+            <Route
+              path="/manage-users"
+              element={
+                isAdmin() ? <ManageUsers /> : <Navigate to="/admin/login" />
+              }
+            />
           </Routes>
         </div>
       </div>

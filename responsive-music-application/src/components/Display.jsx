@@ -1,5 +1,3 @@
-// src/components/Display.jsx
-
 import React, { useContext, useEffect, useRef } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import DisplayHome from "./DisplayHome";
@@ -31,7 +29,7 @@ const Display = () => {
   return (
     <div
       ref={displayRef}
-      className="w-full m-auto px-6 pt-4 text-white overflow-auto lg:w-[75%] lg:ml-0"
+      className="w-full m-0 px-6 pt-4 text-white overflow-auto lg:w-[75%] lg:ml-0 bg-[#121212]"
     >
       {albumsData.length > 0 ? (
         <Routes>
