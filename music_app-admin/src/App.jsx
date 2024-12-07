@@ -30,7 +30,7 @@ const App = () => {
         <Navbar />
         <div className="pt-8 pl-5 sm:pt-12 sm:pl-12">
           <Routes>
-            <Route path="/login" element={<AdminLoginPage />} />
+            <Route path="/admin/login" element={<AdminLoginPage />} />
             {/* Protected Routes */}
             <Route
               path="/add-song"

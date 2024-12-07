@@ -12,7 +12,7 @@ const ManageUsers = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(`${url}/api/users/list`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Include token in headers
         },
       });
       if (response.data.success) {
@@ -32,9 +32,18 @@ const ManageUsers = () => {
   // Remove user
   const removeUser = async (id) => {
     try {
-      await axios.post(`${url}/api/users/remove`, { id });
+      const token = localStorage.getItem("token");
+      await axios.post(
+        `${url}/api/users/remove`,
+        { id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include token in headers
+          },
+        }
+      );
       toast.success("User removed successfully");
-      fetchUsers();
+      fetchUsers(); // Refresh user list
     } catch (error) {
       toast.error("Error removing user");
     }
