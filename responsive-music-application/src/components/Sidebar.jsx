@@ -1,6 +1,8 @@
 import React from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -22,6 +24,13 @@ const Sidebar = () => {
         >
           <img className="w-6" src={assets.search_icon} alt="Search Icon" />
           <p className="font-bold">Search</p>
+        </div>
+        <div
+          onClick={() => navigate("/cart")}
+          className="flex items-center gap-3 pl-6 cursor-pointer hover:bg-[#1f1f1f] hover:rounded p-3 transition"
+        >
+          <FontAwesomeIcon icon={faCartShopping} className="text-xl " />
+          <p className="font-bold">Shopping Cart</p>
         </div>
       </div>
 
