@@ -7,11 +7,9 @@ import { url } from "../App"; // Import base API URL
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const LoginPage = () => {
-  const [isSignUp, setIsSignUp] = useState(false); // State to toggle between login and sign-up
+function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -30,7 +28,8 @@ const LoginPage = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
 
-        navigate("/"); // Redirect to the main app
+        // Redirect all users (including admin) to the main music app
+        navigate("/");
       } else {
         toast.error("Invalid credentials. Please try again.");
       }
@@ -41,138 +40,57 @@ const LoginPage = () => {
     }
   };
 
-  const handleRegister = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.post(`${url}/api/users/register`, {
-        username,
-        email,
-        password,
-      });
-      if (response.data.success) {
-        toast.success("Registration successful!");
-
-        const { token, user } = response.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
-
-        navigate("/"); // Redirect to the main app
-      } else {
-        toast.error("Registration failed. Please try again.");
-      }
-    } catch (error) {
-      toast.error("Error during registration. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
-      <div className={`container ${isSignUp ? "sign-up-mode" : ""}`}>
-        <div className="forms-container">
-          <div className="signin-signup">
-            {/* Sign In Form */}
-            <form className="sign-in-form" onSubmit={(e) => e.preventDefault()}>
-              <h2 className="title">Sign In</h2>
-              <div className="input-field">
-                <i className="fas fa-user"></i>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="input-field">
-                <i className="fas fa-lock"></i>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <button
-                className="btn solid"
-                onClick={handleLogin}
-                disabled={isLoading}
-              >
-                {isLoading ? "Signing In..." : "Sign In"}
-              </button>
-            </form>
-
-            {/* Sign Up Form */}
-            <form className="sign-up-form" onSubmit={(e) => e.preventDefault()}>
-              <h2 className="title">Sign Up</h2>
-              <div className="input-field">
-                <i className="fas fa-user"></i>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div className="input-field">
-                <i className="fas fa-envelope"></i>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="input-field">
-                <i className="fas fa-lock"></i>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <button
-                className="btn solid"
-                onClick={handleRegister}
-                disabled={isLoading}
-              >
-                {isLoading ? "Signing Up..." : "Sign Up"}
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <div className="panels-container">
-          <div className="panel left-panel">
-            <div className="content">
-              <h3>New here?</h3>
-              <p>Sign up to access the full experience.</p>
-              <button
-                className="btn transparent"
-                onClick={() => setIsSignUp(true)}
-              >
-                Sign Up
-              </button>
+    <div
+      className="flex items-center justify-center bg-[#282828] h-screen"
+      style={{ minHeight: "100vh" }}
+    >
+      {/* Wrapper */}
+      <div className="flex flex-col w-full sm:w-[400px] h-auto shadow-lg rounded-lg overflow-hidden bg-[#282828]">
+        <div className="flex flex-col items-center justify-center w-full bg-[#3D9EA0] text-white p-6 sm:p-10 space-y-6">
+          <h2 className="text-2xl sm:text-3xl font-bold">Sign In</h2>
+          <form
+            className="flex flex-col w-full sm:w-2/3 space-y-4"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <div className="flex flex-col space-y-4 w-full max-w-xs mx-auto mt-6">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              />
             </div>
-          </div>
-          <div className="panel right-panel">
-            <div className="content">
-              <h3>Already have an account?</h3>
-              <p>Sign in to continue where you left off.</p>
-              <button
-                className="btn transparent"
-                onClick={() => setIsSignUp(false)}
-              >
-                Sign In
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={handleLogin}
+              className="bg-black text-white rounded-md py-2 font-semibold w-32 mx-auto shadow-xl border-solid border-2 border-white transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-900"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing In..." : "Sign In"}
+            </button>
+          </form>
+          <div className="text-white mt-4">
+            <button
+              onClick={() => navigate("/register")}
+              className="text-white hover:underline"
+            >
+              Don't have an account? Sign Up
+            </button>
           </div>
         </div>
       </div>
       <ToastContainer />
     </div>
   );
-};
+}
 
 export default LoginPage;
