@@ -1,82 +1,177 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { PlayerContext } from "../context/PlayerContext";
 import SongItem from "./SongItem";
+
+import Sidebar from "./Sidebar";
+import NavBar from "./NavBar";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { url } from "../App"; // Import base API URL
 
 const CreatePlaylist = () => {
   const { songsData, playlists, setPlaylists } = useContext(PlayerContext);
   const [playlistName, setPlaylistName] = useState("");
   const [selectedSongs, setSelectedSongs] = useState([]);
 
-  const handleCreatePlaylist = () => {
-    if (playlistName.trim() === "") {
-      alert("Please enter a playlist name.");
+  // Fetch playlists from the backend
+  useEffect(() => {
+    const fetchPlaylists = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${url}/api/playlists/list`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.data.success) {
+          setPlaylists(response.data.playlists);
+        } else {
+          toast.error("Failed to fetch playlists.");
+        }
+      } catch (error) {
+        toast.error("An error occurred while fetching playlists.");
+      }
+    };
+
+    fetchPlaylists();
+  }, [setPlaylists]);
+
+  // Handle creating a playlist
+  const handleCreatePlaylist = async () => {
+    if (!playlistName.trim()) {
+      toast.error("Please enter a playlist name.");
       return;
     }
 
-    const newPlaylist = {
-      id: Date.now(),
-      name: playlistName,
-      songs: selectedSongs,
-    };
+    if (!selectedSongs.length) {
+      toast.error("Please select at least one song.");
+      return;
+    }
 
-    setPlaylists((prevPlaylists) => [...prevPlaylists, newPlaylist]);
-    setPlaylistName("");
-    setSelectedSongs([]);
-    alert("Playlist created successfully!");
-  };
-
-  const handleSongSelection = (song) => {
-    if (selectedSongs.includes(song)) {
-      setSelectedSongs((prevSelected) =>
-        prevSelected.filter((selectedSong) => selectedSong !== song)
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${url}/api/playlists/add`,
+        { name: playlistName, songs: selectedSongs.map((song) => song._id) },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-    } else {
-      setSelectedSongs((prevSelected) => [...prevSelected, song]);
+
+      if (response.data.success) {
+        setPlaylists((prevPlaylists) => [
+          ...prevPlaylists,
+          response.data.playlist,
+        ]);
+        setPlaylistName("");
+        setSelectedSongs([]);
+        toast.success("Playlist created successfully!");
+      } else {
+        toast.error("Failed to create playlist.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while creating the playlist.");
     }
   };
 
+  // Handle song selection
+  const handleSongSelection = (song) => {
+    setSelectedSongs((prevSelected) =>
+      prevSelected.includes(song)
+        ? prevSelected.filter((s) => s !== song)
+        : [...prevSelected, song]
+    );
+  };
+
   return (
-    <div className="p-6 h-screen bg-[#121212] text-white">
-      <h1 className="text-3xl font-bold mb-6">Create a New Playlist</h1>
+    <div className="flex h-screen bg-gradient-to-b from-[#1e1e1e] to-[#121212] text-white">
+      {/* Sidebar */}
+      <Sidebar />
 
-      {/* Input for Playlist Name */}
-      <input
-        type="text"
-        value={playlistName}
-        onChange={(e) => setPlaylistName(e.target.value)}
-        placeholder="Enter playlist name"
-        className="w-full p-3 text-lg bg-[#2b2b2b] rounded-lg text-white mb-6 outline-none placeholder-gray-400"
-      />
+      {/* Main Content */}
+      <div className="flex flex-col flex-grow">
+        {/* Navbar */}
+        <NavBar />
 
-      {/* Song Selection */}
-      <h2 className="text-2xl font-bold text-[#06A0B5] mb-4">Add Songs</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {songsData.map((song, index) => (
-          <div
-            key={index}
-            onClick={() => handleSongSelection(song)}
-            className={`p-4 bg-[#242424] rounded-lg cursor-pointer ${
-              selectedSongs.includes(song) ? "border-2 border-[#06A0B5]" : ""
-            } transition-all`}
-          >
-            <SongItem
-              key={index}
-              name={song.name}
-              desc={song.desc}
-              id={song._id}
-              image={song.image}
-            />
+        <div className="flex-grow p-6 overflow-y-auto">
+          <ToastContainer />
+          <div className="max-w-6xl mx-auto bg-[#242424] rounded-lg p-8 shadow-lg">
+            <h1 className="text-4xl font-bold mb-6 text-center">
+              Create Playlist
+            </h1>
+
+            {/* Input for Playlist Name */}
+            <div className="mb-6">
+              <label
+                htmlFor="playlistName"
+                className="block text-lg font-semibold mb-2"
+              >
+                Playlist Name
+              </label>
+              <input
+                id="playlistName"
+                type="text"
+                value={playlistName}
+                onChange={(e) => setPlaylistName(e.target.value)}
+                placeholder="Enter playlist name"
+                className="w-full p-3 bg-[#2b2b2b] rounded-lg text-white outline-none placeholder-gray-400 focus:ring-2 focus:ring-[#06A0B5]"
+              />
+            </div>
+
+            {/* Song Selection */}
+            <h2 className="text-2xl font-bold mb-4">Add Songs</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+              {songsData.map((song) => (
+                <div
+                  key={song._id}
+                  onClick={() => handleSongSelection(song)}
+                  className={`relative p-4 bg-[#2b2b2b] rounded-lg cursor-pointer hover:shadow-lg transition ${
+                    selectedSongs.includes(song)
+                      ? "border-4 border-[#06A0B5]"
+                      : ""
+                  }`}
+                >
+                  <SongItem
+                    name={song.name}
+                    desc={song.desc}
+                    id={song._id}
+                    image={song.image}
+                  />
+                  {selectedSongs.includes(song) && (
+                    <span className="absolute top-2 right-2 bg-[#06A0B5] text-xs font-bold px-2 py-1 rounded">
+                      Selected
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Create Playlist Button */}
+            <div className="text-center">
+              <button
+                onClick={handleCreatePlaylist}
+                className="px-8 py-3 bg-[#06A0B5] text-lg font-bold rounded-full hover:bg-[#048E9B] transition"
+              >
+                Create Playlist
+              </button>
+            </div>
+
+            {/* Existing Playlists */}
+            <h2 className="text-2xl font-bold mt-8 mb-4">Your Playlists</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {playlists.map((playlist) => (
+                <div
+                  key={playlist._id}
+                  className="bg-[#2b2b2b] rounded-lg p-4 hover:shadow-lg transition"
+                >
+                  <h3 className="text-lg font-bold">{playlist.name}</h3>
+                  <p className="text-sm text-gray-400">
+                    {playlist.songs.length} songs
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
+        </div>
       </div>
-
-      {/* Create Playlist Button */}
-      <button
-        onClick={handleCreatePlaylist}
-        className="mt-8 px-6 py-3 bg-[#06A0B5] text-white rounded-lg text-lg font-bold hover:bg-[#048E9B] transition-all"
-      >
-        Create Playlist
-      </button>
     </div>
   );
 };

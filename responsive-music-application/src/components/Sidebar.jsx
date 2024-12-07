@@ -1,14 +1,12 @@
 import React from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-[25%] h-full p-4 flex flex-col gap-4 text-white hidden lg:flex bg-[#121212]">
+    <div className="w-[25%] h-full p-4 flex-col gap-4 text-white hidden lg:flex bg-[#121212]">
       {/* Header Section */}
       <div className="h-[15%] rounded flex flex-col justify-around">
         <div
@@ -49,7 +47,10 @@ const Sidebar = () => {
         </div>
 
         {/* Create Playlist Section */}
-        <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4">
+        <div
+          className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4 cursor-pointer hover:bg-[#1f1f1f] transition"
+          onClick={() => navigate("/create-playlist")}
+        >
           <h1 className="text-white">Create Your Playlist</h1>
           <p className="font-light text-gray-400">It's easy and free!</p>
           <button className="px-4 py-1.5 bg-[#06A0B5] text-[15px] text-white rounded-full mt-4 transition hover:bg-[#048E9B]">
@@ -66,20 +67,6 @@ const Sidebar = () => {
           <button className="px-4 py-1.5 bg-[#06A0B5] text-[15px] text-white rounded-full mt-4 transition hover:bg-[#048E9B]">
             Browse Podcasts
           </button>
-        </div>
-
-        {/* Shopping Cart Section */}
-        <div
-          onClick={() => navigate("/cart")}
-          className="p-4 bg-[#242424] m-2 rounded font-semibold flex items-center justify-between cursor-pointer hover:bg-[#1f1f1f] transition mt-4"
-        >
-          <div className="flex items-center gap-3">
-            <FontAwesomeIcon icon={faShoppingCart} className="w-6 text-white" />
-            <p className="text-white">Shopping Cart</p>
-          </div>
-          <p className="font-light text-gray-400">
-            {/* Cart count could go here */}
-          </p>
         </div>
       </div>
     </div>

@@ -186,7 +186,6 @@ const removeSongFromPlaylist = async (req, res) => {
   }
 };
 
-// Add the new function to the exports
 export {
   addPlaylist,
   listPlaylists,

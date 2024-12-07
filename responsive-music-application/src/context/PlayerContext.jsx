@@ -12,6 +12,7 @@ const PlayerContextProvider = (props) => {
 
   const [songsData, setSongsData] = useState([]);
   const [albumsData, setAlbumsData] = useState([]);
+  const [playlists, setPlaylists] = useState([]); // Added playlists state
   const [track, setTrack] = useState(null);
   const [playStatus, setPlayStatus] = useState(false);
   const [time, setTime] = useState({
@@ -103,6 +104,21 @@ const PlayerContextProvider = (props) => {
     }
   };
 
+  // Fetch playlists from the server
+  const getPlaylists = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${url}/api/playlists/list`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.data.success) {
+        setPlaylists(response.data.playlists);
+      }
+    } catch (error) {
+      console.error("Error fetching playlists:", error);
+    }
+  };
+
   // Handle time update in the audio player
   useEffect(() => {
     if (audioRef.current) {
@@ -129,10 +145,11 @@ const PlayerContextProvider = (props) => {
     }
   }, [track]);
 
-  // Fetch songs and albums data on component mount
+  // Fetch data on component mount
   useEffect(() => {
     getSongsData();
     getAlbumsData();
+    getPlaylists(); // Fetch playlists
   }, []);
 
   // Automatically play the new track when it changes, if initiated by user action
@@ -161,6 +178,8 @@ const PlayerContextProvider = (props) => {
     seekSong,
     songsData,
     albumsData,
+    playlists, // Provide playlists
+    setPlaylists, // Provide setPlaylists
   };
 
   return (

@@ -11,6 +11,7 @@ import ShoppingCart from "./components/ShoppingCart.jsx"; // Import ShoppingCart
 import SearchPage from "./components/SearchPage.jsx"; // Import SearchPage component
 import { PlayerContext } from "./context/PlayerContext.jsx";
 import ProfilePage from "./components/ProfilePage.jsx";
+import CreatePlaylist from "./components/CreatePlaylist.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 export const url = "http://localhost:4000";
@@ -50,6 +51,14 @@ const App = () => {
         <Route
           path="/search"
           element={isAuthenticated ? <SearchPage /> : <Navigate to="/login" />}
+        />
+
+        {/* Create Playlist Route */}
+        <Route
+          path="/create-playlist"
+          element={
+            isAuthenticated ? <CreatePlaylist /> : <Navigate to="/login" />
+          }
         />
 
         {/* Profile Page Route */}
