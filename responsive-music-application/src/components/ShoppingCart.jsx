@@ -1,10 +1,12 @@
-// src/components/ShoppingCart.jsx
-
 import React, { useState } from "react";
-import { assets } from "../assets/assets";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCcVisa,
+  faCcMastercard,
+  faCcAmex,
+} from "@fortawesome/free-brands-svg-icons";
 
 const ShoppingCart = () => {
-  // Sample cart data
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -12,7 +14,7 @@ const ShoppingCart = () => {
       artist: "Imagine Dragons",
       price: 2.5,
       quantity: 1,
-      image: assets.song_image_1,
+      image: "path/to/song_image_1.jpg",
     },
     {
       id: 2,
@@ -20,7 +22,7 @@ const ShoppingCart = () => {
       artist: "The Neighbourhood",
       price: 2.0,
       quantity: 1,
-      image: assets.song_image_2,
+      image: "path/to/song_image_2.jpg",
     },
     {
       id: 3,
@@ -28,7 +30,7 @@ const ShoppingCart = () => {
       artist: "Evxn",
       price: 1.75,
       quantity: 1,
-      image: assets.song_image_3,
+      image: "path/to/song_image_3.jpg",
     },
   ]);
 
@@ -119,14 +121,25 @@ const ShoppingCart = () => {
       <div className="w-1/3 p-6 bg-[#1b1b1b] rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Card Details</h2>
         <form className="flex flex-col gap-4">
-          <div className="flex gap-2 mb-4">
-            <img src={assets.visa_icon} alt="Visa" className="w-10" />
-            <img
-              src={assets.mastercard_icon}
-              alt="Mastercard"
-              className="w-10"
+          <div className="flex gap-4 mb-4">
+            <FontAwesomeIcon
+              icon={faCcVisa}
+              className=" text-5xl"
+              style={{ color: "#1A1F71" }}
+              title="Visa"
             />
-            <img src={assets.amex_icon} alt="Amex" className="w-10" />
+            <FontAwesomeIcon
+              icon={faCcMastercard}
+              className="text-5xl"
+              style={{ color: "#E4002B" }}
+              title="Mastercard"
+            />
+            <FontAwesomeIcon
+              icon={faCcAmex}
+              className=" text-5xl"
+              style={{ color: "#0079BE" }}
+              title="American Express"
+            />
           </div>
           <input
             type="text"

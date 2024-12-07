@@ -17,15 +17,19 @@ const Player = () => {
   } = useContext(PlayerContext);
 
   return track ? (
-    <div className="h-[10%] bg-[#06A0B5] flex justify-between items-center text-white px-4">
+    <div className="h-[10%] bg-[#3B3D3F] flex justify-between items-center text-white px-2 py-4">
       <div className="hidden lg:flex items-center gap-4">
         <img className="w-12" src={track.image} alt={track.name} />
-        <div>
-          <p>{track.name}</p>
-          <p>{track.desc.slice(0, 12)}</p>
+        <div className="w-32">
+          {" "}
+          {/* Fixed width for the text container */}
+          <p className="truncate">{track.name}</p>
+          <p className="truncate text-sm text-gray-400">
+            {track.desc.slice(0, 12)}
+          </p>
         </div>
       </div>
-      <div className="flex flex-col items-center gap-1 m-auto">
+      <div className="flex flex-col items-center gap-1">
         <div className="flex gap-4">
           <img
             className="w-4 cursor-pointer"

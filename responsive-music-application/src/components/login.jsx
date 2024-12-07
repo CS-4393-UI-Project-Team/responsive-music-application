@@ -1,20 +1,16 @@
-// src/components/login.jsx
-
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { url } from "../App"; // Import base API URL
+import axios from "axios";
+import { url } from "../App";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function LoginPage() {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    setIsLoading(true);
     try {
       const response = await axios.post(`${url}/api/users/login`, {
         email,
@@ -22,75 +18,70 @@ function LoginPage() {
       });
       if (response.data.success) {
         toast.success("Login successful!");
-
-        // Save token and user info to local storage
         const { token, user } = response.data;
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
-
-        // Redirect all users (including admin) to the main music app
         navigate("/");
       } else {
-        toast.error("Invalid credentials. Please try again.");
+        toast.error("Invalid credentials.");
       }
     } catch (error) {
-      toast.error("Error during login. Please check your credentials.");
-    } finally {
-      setIsLoading(false);
+      toast.error("Login failed. Please try again.");
     }
   };
 
   return (
-    <div
-      className="flex items-center justify-center bg-[#282828] h-screen"
-      style={{ minHeight: "100vh" }}
-    >
-      {/* Wrapper */}
-      <div className="flex flex-col w-full sm:w-[400px] h-auto shadow-lg rounded-lg overflow-hidden bg-[#282828]">
-        <div className="flex flex-col items-center justify-center w-full bg-[#3D9EA0] text-white p-6 sm:p-10 space-y-6">
-          <h2 className="text-2xl sm:text-3xl font-bold">Sign In</h2>
-          <form
-            className="flex flex-col w-full sm:w-2/3 space-y-4"
-            onSubmit={(e) => e.preventDefault()}
+    <div className="flex justify-center items-center min-h-screen bg-black">
+      <div className="bg-gray-900 p-8 rounded-lg shadow-md w-[400px]">
+        <h1 className="text-2xl font-bold text-center text-[#00CFFF]">
+          Welcome Back
+        </h1>
+        <p className="text-center text-gray-400 mb-8">
+          Please log in to your account
+        </p>
+        <div className="flex flex-col gap-4">
+          <div>
+            <label className="text-gray-300 block mb-1">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="w-full p-3 rounded-lg bg-gray-800 text-gray-300 border border-gray-700 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-gray-300 block mb-1">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              className="w-full p-3 rounded-lg bg-gray-800 text-gray-300 border border-gray-700 focus:outline-none"
+            />
+          </div>
+          <button
+            onClick={handleLogin}
+            className="w-full bg-[#00CFFF] text-white p-3 rounded-lg font-bold hover:bg-[#00AEDD]"
           >
-            <div className="flex flex-col space-y-4 w-full max-w-xs mx-auto mt-6">
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-              />
-            </div>
-            <button
-              type="button"
-              onClick={handleLogin}
-              className="bg-black text-white rounded-md py-2 font-semibold w-32 mx-auto shadow-xl border-solid border-2 border-white transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-900"
-              disabled={isLoading}
-            >
-              {isLoading ? "Signing In..." : "Sign In"}
-            </button>
-          </form>
-          <div className="text-white mt-4">
+            Login
+          </button>
+        </div>
+        <div className="text-center mt-4">
+          <p className="text-gray-400">
+            Don’t have an account?{" "}
             <button
               onClick={() => navigate("/register")}
-              className="text-white hover:underline"
+              className="text-[#00CFFF] hover:underline"
             >
-              Don't have an account? Sign Up
+              Sign Up
             </button>
-          </div>
+          </p>
         </div>
       </div>
       <ToastContainer />
     </div>
   );
-}
+};
 
 export default LoginPage;

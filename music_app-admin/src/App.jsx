@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,8 +7,8 @@ import AddSong from "./pages/AddSong";
 import AddAlbum from "./pages/AddAlbum";
 import ListSong from "./pages/ListSong";
 import ListAlbum from "./pages/ListAlbum";
-import ManagePlaylists from "./pages/ManagePlaylists"; // Import ManagePlaylists component
-import ManageUsers from "./pages/ManageUsers"; // Import ManageUsers component
+import ManagePlaylists from "./pages/ManagePlaylists";
+import ManageUsers from "./pages/ManageUsers";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import AdminLoginPage from "./components/AdminLoginPage"; // Import AdminLoginPage component
@@ -32,7 +30,7 @@ const App = () => {
         <Navbar />
         <div className="pt-8 pl-5 sm:pt-12 sm:pl-12">
           <Routes>
-            <Route path="/admin/login" element={<AdminLoginPage />} />
+            <Route path="/login" element={<AdminLoginPage />} />
             {/* Protected Routes */}
             <Route
               path="/add-song"

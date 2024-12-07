@@ -1,5 +1,3 @@
-// src/components/SearchPage.jsx
-
 import React, { useState, useContext } from "react";
 import { PlayerContext } from "../context/PlayerContext";
 import AlbumItem from "./AlbumItem";
@@ -23,20 +21,20 @@ const SearchPage = () => {
     const filteredSongs = songsData.filter(
       (song) =>
         song.name.toLowerCase().includes(query) ||
-        song.artist.toLowerCase().includes(query)
+        song.artist?.toLowerCase().includes(query)
     );
 
     const filteredAlbums = albumsData.filter(
       (album) =>
         album.name.toLowerCase().includes(query) ||
-        album.desc.toLowerCase().includes(query)
+        album.desc?.toLowerCase().includes(query)
     );
 
     setSearchResults({ songs: filteredSongs, albums: filteredAlbums });
   };
 
   return (
-    <div className="p-6 h-screen bg-[#121212] text-white">
+    <div className="p-6 h-screen bg-[#121212] text-white overflow-auto">
       {/* Search Input */}
       <div className="mb-8">
         <input
@@ -56,9 +54,9 @@ const SearchPage = () => {
             <div>
               <h2 className="text-2xl font-bold text-[#06A0B5]">Songs</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                {searchResults.songs.map((song, index) => (
+                {searchResults.songs.map((song) => (
                   <SongItem
-                    key={index}
+                    key={song._id}
                     name={song.name}
                     desc={song.desc}
                     id={song._id}
@@ -74,9 +72,9 @@ const SearchPage = () => {
             <div>
               <h2 className="text-2xl font-bold text-[#06A0B5]">Albums</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                {searchResults.albums.map((album, index) => (
+                {searchResults.albums.map((album) => (
                   <AlbumItem
-                    key={index}
+                    key={album._id}
                     name={album.name}
                     desc={album.desc}
                     id={album._id}
@@ -91,7 +89,8 @@ const SearchPage = () => {
           {searchResults.songs.length === 0 &&
             searchResults.albums.length === 0 && (
               <p className="text-gray-400">
-                No results found for "{searchQuery}".
+                No results found for "
+                <span className="font-bold">{searchQuery}</span>".
               </p>
             )}
         </div>

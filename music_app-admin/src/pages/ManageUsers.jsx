@@ -1,5 +1,3 @@
-// src/components/ManageUsers.jsx
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "../App";
@@ -9,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
 
-  // Fetch users
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("token");
